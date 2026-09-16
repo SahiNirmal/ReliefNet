@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-bg: #F6F8F9;
+  --color-surface: #FFFFFF;
+  --color-bg-alt: #ECEFF2;
+  --color-ink: #16202B;
+  --color-ink-soft: #4B5765;
+  --color-line: #DCE2E7;
+
+  --color-crimson: #C81E3A;
+  --color-crimson-dark: #94112A;
+  --color-crimson-tint: #FBE9EC;
+
+  --color-navy: #1B2A4A;
+  --color-navy-tint: #E7EAF1;
+
+  --color-amber: #B9790A;
+  --color-amber-tint: #FBEED9;
+
+  --color-green: #217A4D;
+  --color-green-tint: #E1F2E8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Signature element: the pulse line — an ECG-style heartbeat trace used
+   as the hero's centerpiece and as a section divider throughout the app. */
+.pulse-line {
+  stroke: var(--color-crimson);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: draw-pulse 2.6s ease-out forwards;
+}
+
+@keyframes draw-pulse {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Continuously scrolling ECG trace for the hero's live signal panel */
+.ecg-scroll {
+  width: 200%;
+  animation: scroll-ecg 4.5s linear infinite;
+}
+
+@keyframes scroll-ecg {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Gentle floating motion for the hero's notification cards */
+.float-slow {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+.float-slow-delayed {
+  animation: float-y 5s ease-in-out infinite;
+  animation-delay: 1.4s;
+}
+
+@keyframes float-y {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .ecg-scroll,
+  .float-slow,
+  .float-slow-delayed {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Focus visibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-crimson);
+  outline-offset: 2px;
+}
